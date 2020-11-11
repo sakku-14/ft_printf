@@ -36,6 +36,11 @@ int ft_printf(const char *fmt, ...)
 			fmt++;
 			while (*fmt != 'd')
 				fmt++;
+			if (*fmt == 'd')
+			{
+				char *num = va_arg(args, int);
+				write(1, num, 1);
+			}
 			fmt++;
 		}
 	}
@@ -45,6 +50,5 @@ int ft_printf(const char *fmt, ...)
 
 int main()
 {
-	ft_printf("hello%5.3dworld", 3);
-	return (0);
+	ft_printf("hello%dworld", 3);
 }
