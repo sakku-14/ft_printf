@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void ft_print_str(const char **fmt, const char **start, size_t *n)
+void ft_print_nofmt(const char **fmt, const char **start, size_t *n)
 {
 	size_t	len;
 
@@ -29,7 +29,7 @@ int ft_printf(const char *fmt, ...)
 		if (*fmt != '%')
 		{
 			start = fmt;
-			ft_print_str(&fmt, &start, &n);
+			ft_print_nofmt(&fmt, &start, &n);
 		}
 		else
 		{
@@ -50,5 +50,5 @@ int ft_printf(const char *fmt, ...)
 
 int main()
 {
-	ft_printf("hello%dworld", 3);
+	ft_printf("helloworld", 3);
 }
