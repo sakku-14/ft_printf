@@ -1,54 +1,61 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
 
-void ft_print_nofmt(const char **fmt, const char **start, size_t *n)
+void pf_core(char *fmt_cp, int *n, va_list *ap)
 {
-	size_t	len;
+	char *str, c;
+	int d, len;
 
 	len = 0;
-	while (**fmt != '%' && **fmt)
-		(*fmt)++;
-	write(1, *start, *fmt - *start);
-	if (n >= 0)
-		n += *fmt - *start;
+	if (*fmt_cp == 's')
+	{
+		str = va_arg(*ap, char *);
+		write(1, str, strlen(str));
+	}
+	else if (*fmt_cp == 'd')
+	{
+		d = va_arg(*ap, int);
+		printf("%d", d);
+	}
+	else if (*fmt_cp == 'c')
+	{
+		c = va_arg(*ap, int);
+		write(1, &c, 1);
+	}
 }
+
 
 int ft_printf(const char *fmt, ...)
 {
-	va_list		args;
-	size_t		n;
-	const char	*start;
+	va_list		ap;
+	int n = 0, len = 0;
+	char *fmt_cp;
 
-	n = 0;
-	va_start(args, fmt);
+	va_start(ap, fmt);
 	if (!fmt)
 		n = -1;
+	fmt_cp = strdup(fmt);
 	while (*fmt && n >= 0)
 	{
-		if (*fmt != '%')
-		{
-			start = fmt;
-			ft_print_nofmt(&fmt, &start, &n);
-		}
-		else
-		{
-			fmt++;
-			while (*fmt != 'd')
-				fmt++;
-			if (*fmt == 'd')
-			{
-				char *num = va_arg(args, int);
-				write(1, num, 1);
-			}
-			fmt++;
-		}
+		while (fmt_cp[len] != '%')
+			write(1, &fmt_cp[len++], 1);
+		len++;
+		pf_core(&fmt_cp[len], &n, &ap);
+		len++;
+		if (fmt_cp[len] == '\0')
+			break ;
 	}
-	va_end(args);
+	free(fmt_cp);
+	va_end(ap);
 	return (n);
 }
 
 int main()
 {
-	ft_printf("helloworld", 3);
+	int count = 0;
+	count = ft_printf("str:%s, char:%c, num:%d", "hello", 'W', 14);
+	printf("\n%d\n", count);
 }
