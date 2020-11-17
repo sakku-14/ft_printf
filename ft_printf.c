@@ -1,8 +1,14 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
+#include "ft_printf.h"
+
+void init_flag(t_flag flag)
+{
+	flag.negative = false;
+	flag.zero = false;
+	flag.minField = -1;
+	flag.dot = false;
+	flag.vaDigit = -1;
+	flag.conversion = '\0';
+}
 
 void pf_core(char *fmt_cp, int *n, va_list *ap)
 {
@@ -49,6 +55,7 @@ int ft_printf(const char *fmt, ...)
 			break ;
 	}
 	free(fmt_cp);
+	fmt_cp = NULL;
 	va_end(ap);
 	return (n);
 }

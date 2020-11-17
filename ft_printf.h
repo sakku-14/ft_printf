@@ -6,21 +6,20 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-#include <boolean.h>
+#include <stdbool.h>
 
 typedef struct	s_flag
 {
 	char	*fmt;
 	va_list	ap;
 	int		ret;
-	bool	positive;
 	bool	negative;
-	bool	space;
+	bool	zero;
 	int		minField;
 	bool	dot;
 	int		vaDigit;
 	char	conversion;
-}				t_flag
+}				t_flag;
 
 #endif
 
