@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void init_flag(t_flag flag)
+void pf_initflag(t_flag flag)
 {
 	flag.negative = false;
 	flag.zero = false;
@@ -33,36 +33,66 @@ void pf_core(char *fmt_cp, int *n, va_list *ap)
 	}
 }
 
+void pf_switch(char *fmt, t_flag *flag, va_list *ap)
+{
+	init_flag(flag);
+	flag->fmt = ft_strdup(fmt);
+	pf_check_negative(flag);
+	pf_check_zero(flag);
+	pf_check_minField(flag);
+	pf_check_dot(flag);
+	pf_check_vaDigit(flag);
+	pf_check_conversion(flag);
+	if (flag->conversion == 'c')
+		pf_print_char(flag, ap);
+	else if(flag->conversion == 's')
+		pf_print_str(flag, ap);
+	else if(flag->conversion == 'p')
+		pf_print_adress(flag, ap);
+	else if(flag->conversion == 'd' || flag->conversion == 'i')
+		pf_print_num(flag, ap);
+	else if(flag->conversion == 'u')
+		pf_print_unnum(flag, ap);
+	else if(flag->conversion == 'x')
+		pf_print_xnum(flag, ap);
+	else if(flag->conversion == 'X')
+		pf_print_Xnum(flag, ap);
+	else
+		pf_print_erroract(flag, ap);
+}
 
 int ft_printf(const char *fmt, ...)
 {
 	va_list		ap;
-	int n = 0, len = 0;
-	char *fmt_cp;
+	t_flag		*flag;
 
 	va_start(ap, fmt);
+	pf_switch(&fmt, &flag, &ap);
+/*
 	if (!fmt)
 		n = -1;
-	fmt_cp = strdup(fmt);
-	while (*fmt && n >= 0)
+	flag.fmt = ft_strdup(fmt);
+	while (*(flag.fmt) && n >= 0)
 	{
-		while (fmt_cp[len] != '%')
-			write(1, &fmt_cp[len++], 1);
+		while (flag.fmt[len] != '%')
+			write(1, &(flag.fmt[len++]), 1);
 		len++;
-		pf_core(&fmt_cp[len], &n, &ap);
+		pf_core(&(flag.fmt[len]), &n, &ap);
 		len++;
-		if (fmt_cp[len] == '\0')
+		if (flag.fmt[len] == '\0')
 			break ;
 	}
-	free(fmt_cp);
-	fmt_cp = NULL;
+	free(flag.fmt);
+	flag.fmt = NULL;
+*/
 	va_end(ap);
-	return (n);
+	return (flag.ret);
 }
 
 int main()
 {
 	int count = 0;
-	count = ft_printf("str:%s, char:%c, num:%d", "hello", 'W', 14);
+//	count = ft_printf("str:%s, char:%c, num:%d", "hello", 'W', 14);
+	count = printf("hello");
 	printf("\n%d\n", count);
 }
