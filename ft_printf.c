@@ -7,7 +7,7 @@ void pf_initflag(t_flag flag)
 	flag.minField = -1;
 	flag.dot = false;
 	flag.vaDigit = -1;
-	flag.conversion = '\0';
+	ft_bzero(flag.conversion, sizeof(char));
 }
 
 void pf_core(char *fmt_cp, int *n, va_list *ap)
@@ -33,16 +33,17 @@ void pf_core(char *fmt_cp, int *n, va_list *ap)
 	}
 }
 
-void pf_switch(char *fmt, t_flag *flag, va_list *ap)
+void pf_pack_flag(t_flag **flag, char *fmt, va_list *ap)
 {
+	*(flag->fmt) = ft_strdup(fmt);
+}
+
+void pf_switch(char *fmt, va_list *ap)
+{
+	t_flag **flag;
 	init_flag(flag);
-	flag->fmt = ft_strdup(fmt);
-	pf_check_negative(flag);
-	pf_check_zero(flag);
-	pf_check_minField(flag);
-	pf_check_dot(flag);
-	pf_check_vaDigit(flag);
-	pf_check_conversion(flag);
+
+	pf_pack_flag(flag, fmt, ap);
 	if (flag->conversion == 'c')
 		pf_print_char(flag, ap);
 	else if(flag->conversion == 's')
@@ -64,27 +65,9 @@ void pf_switch(char *fmt, t_flag *flag, va_list *ap)
 int ft_printf(const char *fmt, ...)
 {
 	va_list		ap;
-	t_flag		*flag;
 
 	va_start(ap, fmt);
-	pf_switch(&fmt, &flag, &ap);
-/*
-	if (!fmt)
-		n = -1;
-	flag.fmt = ft_strdup(fmt);
-	while (*(flag.fmt) && n >= 0)
-	{
-		while (flag.fmt[len] != '%')
-			write(1, &(flag.fmt[len++]), 1);
-		len++;
-		pf_core(&(flag.fmt[len]), &n, &ap);
-		len++;
-		if (flag.fmt[len] == '\0')
-			break ;
-	}
-	free(flag.fmt);
-	flag.fmt = NULL;
-*/
+	pf_switch(fmt, &ap);
 	va_end(ap);
 	return (flag.ret);
 }

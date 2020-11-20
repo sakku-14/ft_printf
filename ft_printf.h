@@ -18,7 +18,7 @@ typedef struct	s_flag
 	int		minField;
 	bool	dot;
 	int		vaDigit;
-	char	conversion;
+	char	*conversion;
 }				t_flag;
 
 #endif
