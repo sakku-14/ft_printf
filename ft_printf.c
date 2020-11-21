@@ -1,16 +1,16 @@
 #include "ft_printf.h"
 
-void pf_initflag(t_flag flag)
+void pf_initflag(t_flag **flag)
 {
 	flag.negative = false;
 	flag.zero = false;
 	flag.minField = -1;
 	flag.dot = false;
 	flag.vaDigit = -1;
-	ft_bzero(flag.conversion, sizeof(char));
+	ft_bzero(*(flag.conversion), sizeof(char));
 }
 
-void pf_core(char *fmt_cp, int *n, va_list *ap)
+void pf_core(char **fmt_cp, int *n, va_list *ap)
 {
 	char *str, c;
 	int d, len;
@@ -67,7 +67,7 @@ int ft_printf(const char *fmt, ...)
 	va_list		ap;
 
 	va_start(ap, fmt);
-	pf_switch(fmt, &ap);
+	pf_switch(&fmt, &ap);
 	va_end(ap);
 	return (flag.ret);
 }
