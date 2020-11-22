@@ -3,7 +3,7 @@
 int main()
 {
 	printf("-----------%%c--------------\n");
-	char c = 'a';
+	int c = 'a';
 	printf("%-10s[%c]\n", "[c]", c);
 	printf("%-10s[%4c]\n", "[4c]", c);
 	printf("%-10s[%04c]\n", "[04c]", c);
@@ -80,7 +80,7 @@ int main()
 	printf("%-10s[%*u]\n", "[*u]", 4, u);
 	printf("%-10s[%*.*u]\n\n", "[*.*u]", 6, 4, u);
 	printf("-----------%%x--------------\n");
-	int x = 123;
+	unsigned int x = 123;
 	printf("%-10s[%x]\n", "[x]", x);
 	printf("%-10s[%4x]\n", "[4x]", x);
 	printf("%-10s[%04x]\n", "[04x]", x);
@@ -93,7 +93,7 @@ int main()
 	printf("%-10s[%*x]\n", "[*x]", 4, x);
 	printf("%-10s[%*.*x]\n\n", "[*.*x]", 6, 4, x);
 	printf("-----------%%X--------------\n");
-	int X = 123;
+	unsigned int X = 123;
 	printf("%-10s[%X]\n", "[X]", X);
 	printf("%-10s[%4X]\n", "[4X]", X);
 	printf("%-10s[%04X]\n", "[04X]", X);
