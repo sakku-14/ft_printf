@@ -109,6 +109,7 @@ void pf_print_adress(t_flag **flag, va_list *ap)
 	int64_t adress;
 
 	adress = (int64_t)va_arg(*ap, void *);
+	write(1, "0x", 2);
 	ft_putadnbr_fd(adress, 1);
 }
 
