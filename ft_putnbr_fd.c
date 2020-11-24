@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 22:48:32 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 13:04:42 by ysakuma          ###   ########.fr       */
+/*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
+/*   Updated: 2020/11/24 20:14:24 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char *ss;
+	unsigned int nbr;
 
-	ss = (unsigned char *)s;
-	while (n-- > 0)
-		*ss++ = '\0';
+	if (n < 0)
+	{
+		nbr = (unsigned int)(-1 * n);
+		ft_putchar_fd('-', fd);
+	}
+	else
+		nbr = (unsigned int)n;
+	if (nbr >= 10)
+	{
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
+	}
+	else
+		ft_putchar_fd(nbr + '0', fd);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 22:48:32 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 13:04:42 by ysakuma          ###   ########.fr       */
+/*   Created: 2020/10/13 22:54:37 by ysakuma           #+#    #+#             */
+/*   Updated: 2020/11/24 18:51:33 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_bzero(void *s, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	unsigned char *ss;
+	size_t len;
 
-	ss = (unsigned char *)s;
-	while (n-- > 0)
-		*ss++ = '\0';
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }
