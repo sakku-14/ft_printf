@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <stdint.h>
 
 void pf_initflag(t_flag **flag)
 {
@@ -104,6 +105,14 @@ void pf_print_lxnum(t_flag **flag, va_list *ap)
 	ft_putlxnbr_fd(num, 1);
 }
 
+void pf_print_adress(t_flag **flag, va_list *ap)
+{
+	long adress;
+
+	adress = (long)va_arg(*ap, void *);
+	ft_putxnbr_fd(adress, 1);
+}
+
 int pf_switch(const char **fmt, va_list *ap)
 {
 	t_flag *flag;
@@ -116,6 +125,8 @@ int pf_switch(const char **fmt, va_list *ap)
 		pf_print_char(&flag, ap);
 	else if(flag->conversion == 's')
 		pf_print_str(&flag, ap);
+	else if(flag->conversion == 'p')
+		pf_print_adress(&flag, ap);
 	else if(flag->conversion == 'd' || flag->conversion == 'i')
 		pf_print_num(&flag, ap);
 	else if(flag->conversion == 'u')
@@ -125,8 +136,6 @@ int pf_switch(const char **fmt, va_list *ap)
 	else if(flag->conversion == 'X')
 		pf_print_lxnum(&flag, ap);
 /*
-	else if(flag->conversion == 'p')
-		pf_print_adress(&flag, ap);
 	else
 		pf_print_erroract(&flag, ap);
 */
@@ -155,6 +164,8 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
-	count = ft_printf("u:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\n", 4294967295, '3', "aaa", 100, 999, 555, 555);
+	char *str = "hello";
+	count = ft_printf("u:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:0x10%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
+	printf("p:%p\n", str);
 	printf("\n%d\n", count);
 }
