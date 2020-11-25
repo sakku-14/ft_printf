@@ -5,19 +5,15 @@ void pf_initflag(t_flag **flag)
 	(*flag)->negative = false;
 	(*flag)->zero = false;
 	(*flag)->minField = -1;
-	(*flag)->dot = false;
 	(*flag)->vaDigit = -1;
 	ft_bzero(&(*flag)->conversion, sizeof(char));
 }
 
-void pf_pack_num(t_flag **flag, const char **fmt, va_list *ap)
+int pf_pack_minf(t_flag **flag, const char **fmt, va_list *ap)
 {
 	int *tmp;
 
-	if ((*flag)->dot == false)
-		tmp = &(*flag)->minField;
-	else
-		tmp = &(*flag)->vaDigit;
+	tmp = &(*flag)->minField;
 	*tmp = 0;
 	while (**fmt && **fmt >= '0' && **fmt <= '9')
 	{
@@ -25,6 +21,32 @@ void pf_pack_num(t_flag **flag, const char **fmt, va_list *ap)
 		*tmp += **fmt - '0';
 		(*fmt)++;
 	}
+	if (!**fmt)
+		return (0);
+	return (1);
+}
+
+int pf_pack_vad(t_flag **flag, const char **fmt, va_list *ap)
+{
+	int *tmp;
+
+	tmp = &(*flag)->vaDigit;
+	*tmp = 0;
+	(*fmt)++;
+	if (!(**fmt >= '0' && **fmt <= '9'))
+	{
+		(*fmt)--;
+		return (1);
+	}
+	while (**fmt && **fmt >= '0' && **fmt <= '9')
+	{
+		*tmp *= 10;
+		*tmp += **fmt - '0';
+		(*fmt)++;
+	}
+	if (!**fmt)
+		return (0);
+	return (1);
 }
 
 void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap)
@@ -38,15 +60,13 @@ void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap)
 		else if (**fmt == '0')
 			(*flag)->zero = true;
 		else if (**fmt >= '1' && **fmt <= '9')
-		{
-			pf_pack_num(flag, fmt, ap);
-			if (!**fmt)
+			if (!(pf_pack_minf(flag, fmt, ap)))
 				break ;
-		}
-		if (**fmt == '.')//この後にpf_pack_numで処理か！？
-			(*flag)->dot = true;
+		if (**fmt == '.')
+			if (!(pf_pack_vad(flag, fmt, ap)))
+				break ;
 		if (**fmt == 'c' || **fmt == 's' || **fmt == 'p' || **fmt == 'd' ||
-			**fmt == 'i' || **fmt == 'u' || **fmt == 'x' || **fmt == 'X')
+			**fmt == 'i' || **fmt == 'u' || **fmt == 'x' || **fmt == 'X' || **fmt == '%')
 		{
 			(*flag)->conversion = **fmt;
 			(*fmt)++;
@@ -113,6 +133,11 @@ void pf_print_adress(t_flag **flag, va_list *ap)
 	ft_putadnbr_fd(adress, 1);
 }
 
+void pf_print_percent(t_flag **flag, va_list *ap)
+{
+	write(1, "%", 1);
+}
+
 int pf_switch(const char **fmt, va_list *ap)
 {
 	t_flag *flag;
@@ -120,7 +145,7 @@ int pf_switch(const char **fmt, va_list *ap)
 		return (-1);
 	pf_initflag(&flag);
 	pf_pack_flag(&flag, fmt, ap);
-//	printf("\nneg:%d\nzero:%d\nminField:%d\ndot:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).dot, (*flag).vaDigit, (*flag).conversion);
+//	printf("\nneg:%d\nzero:%d\nminField:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).vaDigit, (*flag).conversion);
 	if (flag->conversion == 'c')
 		pf_print_char(&flag, ap);
 	else if(flag->conversion == 's')
@@ -135,6 +160,8 @@ int pf_switch(const char **fmt, va_list *ap)
 		pf_print_xnum(&flag, ap);
 	else if(flag->conversion == 'X')
 		pf_print_lxnum(&flag, ap);
+	else if(flag->conversion == '%')
+		pf_print_percent(&flag, ap);
 /*
 	else
 		pf_print_erroract(&flag, ap);
@@ -165,7 +192,8 @@ int main()
 {
 	int count = 0;
 	char *str = "hello";
-	count = ft_printf("%-05d", 5);
-//	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
+//	count = ft_printf("%-5.t3.5s\n", "aaaaa");
+//	count = ft_printf("%%", 5);
+	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
 	printf("\n%d\n", count);
 }
