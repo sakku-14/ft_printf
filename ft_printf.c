@@ -120,7 +120,7 @@ int pf_switch(const char **fmt, va_list *ap)
 		return (-1);
 	pf_initflag(&flag);
 	pf_pack_flag(&flag, fmt, ap);
-	printf("\nneg:%d\nzero:%d\nminField:%d\ndot:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).dot, (*flag).vaDigit, (*flag).conversion);
+//	printf("\nneg:%d\nzero:%d\nminField:%d\ndot:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).dot, (*flag).vaDigit, (*flag).conversion);
 	if (flag->conversion == 'c')
 		pf_print_char(&flag, ap);
 	else if(flag->conversion == 's')
