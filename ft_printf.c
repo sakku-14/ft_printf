@@ -43,7 +43,7 @@ void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap)
 			if (!**fmt)
 				break ;
 		}
-		if (**fmt == '.')
+		if (**fmt == '.')//この後にpf_pack_numで処理か！？
 			(*flag)->dot = true;
 		if (**fmt == 'c' || **fmt == 's' || **fmt == 'p' || **fmt == 'd' ||
 			**fmt == 'i' || **fmt == 'u' || **fmt == 'x' || **fmt == 'X')
@@ -120,7 +120,7 @@ int pf_switch(const char **fmt, va_list *ap)
 		return (-1);
 	pf_initflag(&flag);
 	pf_pack_flag(&flag, fmt, ap);
-//	printf("\nneg:%d\nzero:%d\nminField:%d\ndot:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).dot, (*flag).vaDigit, (*flag).conversion);
+	printf("\nneg:%d\nzero:%d\nminField:%d\ndot:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).dot, (*flag).vaDigit, (*flag).conversion);
 	if (flag->conversion == 'c')
 		pf_print_char(&flag, ap);
 	else if(flag->conversion == 's')
@@ -165,6 +165,7 @@ int main()
 {
 	int count = 0;
 	char *str = "hello";
-	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
+	count = ft_printf("%-05d", 5);
+//	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
 	printf("\n%d\n", count);
 }
