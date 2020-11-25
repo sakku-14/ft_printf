@@ -28,7 +28,7 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putusnbr_fd(unsigned int nbr, int fd);
 void	ft_putxnbr_fd(unsigned int nbr, int fd);
 void	ft_putlxnbr_fd(unsigned int nbr, int fd);
-void	ft_putadnbr_fd(int64_t nbr, int fd);
+void	ft_putadnbr_fd(uintptr_t nbr, int fd);
 size_t	ft_strlen(const char *s);
 void pf_initflag(t_flag **flag);
 void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap);

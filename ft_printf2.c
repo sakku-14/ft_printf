@@ -106,9 +106,9 @@ void pf_print_lxnum(t_flag **flag, va_list *ap)
 
 void pf_print_adress(t_flag **flag, va_list *ap)
 {
-	int64_t adress;
+	uintptr_t adress;
 
-	adress = (int64_t)va_arg(*ap, void *);
+	adress = (uintptr_t)va_arg(*ap, void *);
 	write(1, "0x", 2);
 	ft_putadnbr_fd(adress, 1);
 }
@@ -166,6 +166,5 @@ int main()
 	int count = 0;
 	char *str = "hello";
 	count = ft_printf("u:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
-	printf("p:%p\n", str);
 	printf("\n%d\n", count);
 }

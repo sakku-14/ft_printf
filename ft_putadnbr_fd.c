@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/25 08:21:10 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/11/25 10:34:26 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putadnbr_fd(int64_t nbr, int fd)
+void	ft_putadnbr_fd(uintptr_t nbr, int fd)
 {
 	if (nbr >= 16)
 	{
