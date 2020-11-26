@@ -172,6 +172,29 @@ int pf_check_digit(int num)
 	return (ret);
 }
 
+void pf_print_zero(t_flag **flag, int digit)
+{
+	int counter;
+
+	counter = 0;
+	while (++counter < (*flag)->vaDigit - digit)
+		write(1, "0", 1);
+}
+
+void pf_print_space(t_flag **flag)
+{
+	int counter;
+
+	counter = 0;
+	while (counter++ < (*flag)->minField - (*flag)->vaDigit)
+		write(1, " ", 1);
+}
+
+void pf_print_num_pos(t_flag **flag, int digit, int num)
+{
+
+}
+
 void pf_print_num(t_flag **flag, va_list *ap)
 {
 	int num;
@@ -180,36 +203,56 @@ void pf_print_num(t_flag **flag, va_list *ap)
 
 	num = va_arg(*ap, int);
 	digit = pf_check_digit(num);
+	if ((*flag)->minField < (*flag)->vaDigit)
+		(*flag)->minField = (*flag)->vaDigit;
 	if ((*flag)->vaDigit < digit)
 		(*flag)->vaDigit = digit;
 	if ((*flag)->minField > digit)
 	{
-		if ((*flag)->negative)
+		if (num >= 0)
 		{
-			counter = 0;
-			while (++counter < (*flag)->vaDigit - digit)
-				write(1, "0", 1);
-			ft_putnbr_fd(num, 1);
-			counter = 0;
-			while (counter++ < (*flag)->minField - (*flag)->vaDigit)
-				write(1, " ", 1);
-		}
-		else if ((*flag)->zero)
-		{
-			counter = 0;
-			while (counter++ < (*flag)->minField - (*flag)->vaDigit)
-				write(1, " ", 1);
-			counter = 0;
-			while (++counter < (*flag)->vaDigit - digit)
-				write(1, "0", 1);
-			ft_putnbr_fd(num, 1);
+			if ((*flag)->negative)
+			{
+				pf_print_zero(flag, digit);
+				ft_putnbr_fd(num, 1);
+				pf_print_space(flag);
+			}
+			else if ((*flag)->zero)
+			{
+				pf_print_space(flag);
+				pf_print_zero(flag, digit);
+				ft_putnbr_fd(num, 1);
+			}
+			else
+			{
+				pf_print_space(flag);
+				ft_putnbr_fd(num, 1);
+			}
 		}
 		else
 		{
-			counter = 0;
-			while (counter++ < (*flag)->minField - digit)
-				write(1, " ", 1);
-			ft_putnbr_fd(num, 1);
+			((*flag)->minField)--;
+			if ((*flag)->negative)
+			{
+				write(1, "-", 1);
+				pf_print_zero(flag, digit);
+				ft_putnbr_fd(-num, 1);
+				pf_print_space(flag);
+			}
+			else if ((*flag)->zero)
+			{
+				pf_print_space(flag);
+				write(1, "-", 1);
+				pf_print_zero(flag, digit);
+				ft_putnbr_fd(-num, 1);
+			}
+			else
+			{
+				pf_print_space(flag);
+				write(1, "-", 1);
+				pf_print_zero(flag, digit);
+				ft_putnbr_fd(-num, 1);
+			}
 		}
 	}
 	else
@@ -309,8 +352,8 @@ int main()
 	int num = 123;
 	char c = 'x';
 	char *str = "aa";
-	count = ft_printf("[%07.5d]\n", num);
-	count = printf("[%07.5d]\n", num);
+	count = ft_printf("ft_printf->[%-7.5d]\n", num);
+	count = printf("printf---->[%-7.5d]\n", num);
 //	count = ft_printf("[%-06.4s]\n", str);
 //	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
