@@ -51,8 +51,7 @@ int pf_pack_vad(t_flag **flag, const char **fmt, va_list *ap)
 
 void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap)
 {
-	if (**fmt == '%')
-		(*fmt)++;
+	(*fmt)++;
 	while (**fmt)
 	{
 		if (**fmt == '-')
@@ -76,20 +75,77 @@ void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap)
 	}
 }
 
+void pf_print_onechar(t_flag **flag, int c)
+{
+	if ((*flag)->minField > 1)
+	{
+		if ((*flag)->negative)
+		{
+			write(1, &c, 1);
+			while (--((*flag)->minField))
+				write(1, " ", 1);
+		}
+		else if ((*flag)->zero)
+		{
+			while (--((*flag)->minField))
+				write(1, "0", 1);
+			write(1, &c, 1);
+		}
+		else
+		{
+			while (--((*flag)->minField))
+				write(1, " ", 1);
+			write(1, &c, 1);
+		}
+	}
+	else
+		write(1, &c, 1);
+}
+
 void pf_print_char(t_flag **flag, va_list *ap)
 {
 	int c;
 
 	c = va_arg(*ap, int);
-	write(1, &c, 1);
+	pf_print_onechar(flag, c);
+}
+
+void pf_print_str_sub(t_flag **flag, char *str)
+{
+	if ((*flag)->minField > (*flag)->vaDigit)
+	{
+		if ((*flag)->negative)
+		{
+			write(1, str, (*flag)->vaDigit);
+			while (((*flag)->minField)-- > (*flag)->vaDigit)
+				write(1, " ", 1);
+		}
+		else if ((*flag)->zero)
+		{
+			while (((*flag)->minField)-- > (*flag)->vaDigit)
+				write(1, "0", 1);
+			write(1, str, (*flag)->vaDigit);
+		}
+		else
+		{
+			while (((*flag)->minField)-- > (*flag)->vaDigit)
+				write(1, " ", 1);
+			write(1, str, (*flag)->vaDigit);
+		}
+	}
+	else
+		write(1, str, (*flag)->vaDigit);
 }
 
 void pf_print_str(t_flag **flag, va_list *ap)
 {
 	char *str;
+	int min;
 
 	str = va_arg(*ap, char *);
-	write(1, str, ft_strlen(str));
+	if ((*flag)->vaDigit == -1)
+		(*flag)->vaDigit = ft_strlen(str);
+	pf_print_str_sub(flag, str);
 }
 
 void pf_print_num(t_flag **flag, va_list *ap)
@@ -135,7 +191,7 @@ void pf_print_adress(t_flag **flag, va_list *ap)
 
 void pf_print_percent(t_flag **flag, va_list *ap)
 {
-	write(1, "%", 1);
+	pf_print_onechar(flag, '%');
 }
 
 int pf_switch(const char **fmt, va_list *ap)
@@ -178,11 +234,8 @@ int ft_printf(const char *fmt, ...)
 	{
 		if (*fmt != '%')
 			write(1, fmt++, 1);
-		else
-		{
-			if (!(pf_switch(&fmt, &ap)))
+		else if (!(pf_switch(&fmt, &ap)))
 				return (-1);
-		}
 	}
 	va_end(ap);
 	return (1);
@@ -191,9 +244,12 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
+	char c = 'x';
 	char *str = "hello";
+	count = ft_printf("[%-6.4s]\n", str);
+	//	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
 //	count = ft_printf("%%", 5);
-	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
+//	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
 	printf("\n%d\n", count);
 }
