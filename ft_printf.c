@@ -314,12 +314,57 @@ void pf_print_usnum(t_flag **flag, va_list *ap)
 		ft_putusnbr_fd(num, 1);
 }
 
+int pf_check_xdigit(unsigned int num)
+{
+	int count;
+
+	count = 0;
+	while (num > 1)
+	{
+		num /= 16;
+		count++;
+	}
+	return (count);
+}
+
+void pf_print_xnum_sub(t_flag **flag, int digit, unsigned int num)
+{
+	if ((*flag)->negative)
+	{
+		pf_print_zero(flag, digit);
+		ft_putxnbr_fd(num, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putxnbr_fd(num, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putxnbr_fd(num, 1);
+	}
+}
+
 void pf_print_xnum(t_flag **flag, va_list *ap)
 {
 	unsigned int num;
+	int digit;
 
 	num = va_arg(*ap, unsigned int);
-	ft_putxnbr_fd(num, 1);
+	digit = pf_check_xdigit(num);
+
+	if ((*flag)->minField < (*flag)->vaDigit)
+		(*flag)->minField = (*flag)->vaDigit;
+	if ((*flag)->vaDigit < digit)
+		(*flag)->vaDigit = digit;
+	if ((*flag)->minField > digit)
+		pf_print_xnum_sub(flag, digit, num);
+	else
+		ft_putxnbr_fd(num, 1);
 }
 
 void pf_print_lxnum(t_flag **flag, va_list *ap)
@@ -444,12 +489,14 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
-//	unsigned int u = 123;
+	unsigned int x = 123;
 //	int num = 123;
 //	char c = 'x';
-	char *str = "aa";
-	count = ft_printf("ft_printf->[%20.0p]\n", str);
-	count = printf("printf---->[%20.0p]\n", str);
+//	char *str = "aa";
+	count = ft_printf("ft_printf->[%10.5x]\n", x);
+	count = printf("printf---->[%10.5x]\n", x);
+//	count = ft_printf("ft_printf->[%20.0p]\n", str);
+//	count = printf("printf---->[%20.0p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
 //	count = ft_printf("ft_printf->[%08.5u]\n", u);
 //	count = printf("printf---->[%08.5u]\n", u);
