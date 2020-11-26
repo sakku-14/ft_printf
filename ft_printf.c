@@ -143,17 +143,76 @@ void pf_print_str(t_flag **flag, va_list *ap)
 	int min;
 
 	str = va_arg(*ap, char *);
-	if ((*flag)->vaDigit == -1)
+	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > ft_strlen(str))
 		(*flag)->vaDigit = ft_strlen(str);
 	pf_print_str_sub(flag, str);
+}
+
+int pf_check_digit(int num)
+{
+	int ret;
+
+	ret = 0;
+	if (num > 0)
+	{
+		while (num > 1)
+		{
+			num /= 10;
+			ret++;
+		}
+	}
+	else
+	{
+		while (num < -1)
+		{
+			num /= 10;
+			ret ++;
+		}
+	}
+	return (ret);
 }
 
 void pf_print_num(t_flag **flag, va_list *ap)
 {
 	int num;
+	int counter;
+	int digit;
 
 	num = va_arg(*ap, int);
-	ft_putnbr_fd(num, 1);
+	digit = pf_check_digit(num);
+	if ((*flag)->vaDigit < digit)
+		(*flag)->vaDigit = digit;
+	if ((*flag)->minField > digit)
+	{
+		if ((*flag)->negative)
+		{
+			counter = 0;
+			while (counter++ < (*flag)->vaDigit - digit)
+				write(1, "0", 1);
+			ft_putnbr_fd(num, 1);
+		}
+		else if ((*flag)->zero)
+		{
+			counter = 0;
+			while (counter++ < (*flag)->minField - (*flag)->vaDigit)
+				write(1, " ", 1);
+			counter = 0;
+			while (counter++ < (*flag)->vaDigit - digit)
+				write(1, "0", 1);
+			ft_putnbr_fd(num, 1);
+		}
+		else
+		{
+			counter = 0;
+			while (counter++ < (*flag)->minField - digit)
+				write(1, " ", 1);
+			ft_putnbr_fd(num, 1);
+		}
+	}
+	else
+	{
+		ft_putnbr_fd(num, 1);
+	}
 }
 
 void pf_print_usnum(t_flag **flag, va_list *ap)
@@ -244,10 +303,12 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
+	int num = 123;
 	char c = 'x';
-	char *str = "hello";
-	count = ft_printf("[%-6.4s]\n", str);
-	//	count = ft_printf("[%%]\n");
+	char *str = "aa";
+	count = ft_printf("%d\n", num);
+//	count = ft_printf("[%-06.4s]\n", str);
+//	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
 //	count = ft_printf("%%", 5);
 //	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
