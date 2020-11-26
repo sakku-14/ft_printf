@@ -187,9 +187,12 @@ void pf_print_num(t_flag **flag, va_list *ap)
 		if ((*flag)->negative)
 		{
 			counter = 0;
-			while (counter++ < (*flag)->vaDigit - digit)
+			while (++counter < (*flag)->vaDigit - digit)
 				write(1, "0", 1);
 			ft_putnbr_fd(num, 1);
+			counter = 0;
+			while (counter++ < (*flag)->minField - (*flag)->vaDigit)
+				write(1, " ", 1);
 		}
 		else if ((*flag)->zero)
 		{
@@ -197,7 +200,7 @@ void pf_print_num(t_flag **flag, va_list *ap)
 			while (counter++ < (*flag)->minField - (*flag)->vaDigit)
 				write(1, " ", 1);
 			counter = 0;
-			while (counter++ < (*flag)->vaDigit - digit)
+			while (++counter < (*flag)->vaDigit - digit)
 				write(1, "0", 1);
 			ft_putnbr_fd(num, 1);
 		}
@@ -306,7 +309,8 @@ int main()
 	int num = 123;
 	char c = 'x';
 	char *str = "aa";
-	count = ft_printf("%d\n", num);
+	count = ft_printf("[%07.5d]\n", num);
+	count = printf("[%07.5d]\n", num);
 //	count = ft_printf("[%-06.4s]\n", str);
 //	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
