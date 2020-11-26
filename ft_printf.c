@@ -399,8 +399,8 @@ int main()
 //	char c = 'x';
 //	char *str = "aa";
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
-	count = ft_printf("ft_printf->[%8.5u]\n", u);
-	count = printf("printf---->[%8.5u]\n", u);
+	count = ft_printf("ft_printf->[%-8.5u]\n", u);
+	count = printf("printf---->[%-8.5u]\n", u);
 //	count = ft_printf("[%-06.4s]\n", str);
 //	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
