@@ -207,6 +207,7 @@ void pf_print_num_pos(t_flag **flag, int digit, int num)
 	else
 	{
 		pf_print_space(flag);
+		pf_print_zero(flag, digit);
 		ft_putnbr_fd(num, 1);
 	}
 }
@@ -261,12 +262,56 @@ void pf_print_num(t_flag **flag, va_list *ap)
 	}
 }
 
+int pf_check_usdigit(unsigned int num)
+{
+	int ret;
+
+	ret = 0;
+	while (num > 1)
+	{
+		num /= 10;
+		ret++;
+	}
+	return (ret);
+}
+
+void pf_print_usnum_pos(t_flag **flag, int digit, unsigned int num)
+{
+	if ((*flag)->negative)
+	{
+		pf_print_zero(flag, digit);
+		ft_putusnbr_fd(num, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putusnbr_fd(num, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putusnbr_fd(num, 1);
+	}
+}
+
 void pf_print_usnum(t_flag **flag, va_list *ap)
 {
 	unsigned int num;
+	int digit;
 
 	num = va_arg(*ap, unsigned int);
-	ft_putusnbr_fd(num, 1);
+	digit = pf_check_usdigit(num);
+	if ((*flag)->minField < (*flag)->vaDigit)
+		(*flag)->minField = (*flag)->vaDigit;
+	if ((*flag)->vaDigit < digit)
+		(*flag)->vaDigit = digit;
+	if ((*flag)->minField > digit)
+		pf_print_usnum_pos(flag, digit, num);
+	else
+		ft_putusnbr_fd(num, 1);
 }
 
 void pf_print_xnum(t_flag **flag, va_list *ap)
@@ -349,11 +394,13 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
-	int num = 123;
-	char c = 'x';
-	char *str = "aa";
-	count = ft_printf("ft_printf->[%-7.5d]\n", num);
-	count = printf("printf---->[%-7.5d]\n", num);
+	unsigned int u = 123;
+//	int num = 123;
+//	char c = 'x';
+//	char *str = "aa";
+//	count = ft_printf("ft_printf->[%-7.5d]\n", num);
+	count = ft_printf("ft_printf->[%8.5u]\n", u);
+	count = printf("printf---->[%8.5u]\n", u);
 //	count = ft_printf("[%-06.4s]\n", str);
 //	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
