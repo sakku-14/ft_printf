@@ -330,13 +330,63 @@ void pf_print_lxnum(t_flag **flag, va_list *ap)
 	ft_putlxnbr_fd(num, 1);
 }
 
-void pf_print_adress(t_flag **flag, va_list *ap)
+int pf_check_adddigit(uintptr_t address)
 {
-	uintptr_t adress;
+	int count;
 
-	adress = (uintptr_t)va_arg(*ap, void *);
-	write(1, "0x", 2);
-	ft_putadnbr_fd(adress, 1);
+	count = 0;
+	while (address > 1)
+	{
+		address /= 16;
+		count++;
+	}
+	return (count);
+}
+
+void pf_print_add(t_flag **flag, int digit, uintptr_t address)
+{
+	(*flag)->minField -= 2;
+	if ((*flag)->negative)
+	{
+		write(1, "0x", 2);
+		pf_print_zero(flag, digit);
+		ft_putadnbr_fd(address, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		write(1, "0x", 2);
+		pf_print_zero(flag, digit);
+		ft_putadnbr_fd(address, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		write(1, "0x", 2);
+		pf_print_zero(flag, digit);
+		ft_putadnbr_fd(address, 1);
+	}
+}
+
+void pf_print_address(t_flag **flag, va_list *ap)
+{
+	uintptr_t address;
+	int digit;
+
+	address = (uintptr_t)va_arg(*ap, void *);
+	digit = pf_check_adddigit(address);
+	if ((*flag)->minField < (*flag)->vaDigit)
+		(*flag)->minField = (*flag)->vaDigit;
+	if ((*flag)->vaDigit < digit)
+		(*flag)->vaDigit = digit;
+	if ((*flag)->minField > digit)
+		pf_print_add(flag, digit, address);
+	else
+	{
+		write(1, "0x", 2);
+		ft_putadnbr_fd(address, 1);
+	}
 }
 
 void pf_print_percent(t_flag **flag, va_list *ap)
@@ -357,7 +407,7 @@ int pf_switch(const char **fmt, va_list *ap)
 	else if(flag->conversion == 's')
 		pf_print_str(&flag, ap);
 	else if(flag->conversion == 'p')
-		pf_print_adress(&flag, ap);
+		pf_print_address(&flag, ap);
 	else if(flag->conversion == 'd' || flag->conversion == 'i')
 		pf_print_num(&flag, ap);
 	else if(flag->conversion == 'u')
@@ -394,13 +444,15 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
-	unsigned int u = 123;
+//	unsigned int u = 123;
 //	int num = 123;
 //	char c = 'x';
-//	char *str = "aa";
+	char *str = "aa";
+	count = ft_printf("ft_printf->[%-20p]\n", str);
+	count = printf("printf---->[%-20p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
-	count = ft_printf("ft_printf->[%-8.5u]\n", u);
-	count = printf("printf---->[%-8.5u]\n", u);
+//	count = ft_printf("ft_printf->[%08.5u]\n", u);
+//	count = printf("printf---->[%08.5u]\n", u);
 //	count = ft_printf("[%-06.4s]\n", str);
 //	count = ft_printf("[%%]\n");
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
