@@ -379,7 +379,7 @@ void pf_print_address(t_flag **flag, va_list *ap)
 	if ((*flag)->minField < (*flag)->vaDigit)
 		(*flag)->minField = (*flag)->vaDigit;
 	if ((*flag)->vaDigit < digit)
-		(*flag)->vaDigit = digit;
+		(*flag)->vaDigit = digit + 1;
 	if ((*flag)->minField > digit)
 		pf_print_add(flag, digit, address);
 	else
@@ -448,8 +448,8 @@ int main()
 //	int num = 123;
 //	char c = 'x';
 	char *str = "aa";
-	count = ft_printf("ft_printf->[%-20p]\n", str);
-	count = printf("printf---->[%-20p]\n", str);
+	count = ft_printf("ft_printf->[%20.0p]\n", str);
+	count = printf("printf---->[%20.0p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
 //	count = ft_printf("ft_printf->[%08.5u]\n", u);
 //	count = printf("printf---->[%08.5u]\n", u);
