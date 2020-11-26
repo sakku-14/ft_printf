@@ -192,13 +192,54 @@ void pf_print_space(t_flag **flag)
 
 void pf_print_num_pos(t_flag **flag, int digit, int num)
 {
+	if ((*flag)->negative)
+	{
+		pf_print_zero(flag, digit);
+		ft_putnbr_fd(num, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putnbr_fd(num, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		ft_putnbr_fd(num, 1);
+	}
+}
 
+void pf_print_num_neg(t_flag **flag, int digit, int num)
+{
+	((*flag)->minField)--;
+	if ((*flag)->negative)
+	{
+		write(1, "-", 1);
+		pf_print_zero(flag, digit);
+		ft_putnbr_fd(-num, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		write(1, "-", 1);
+		pf_print_zero(flag, digit);
+		ft_putnbr_fd(-num, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		write(1, "-", 1);
+		pf_print_zero(flag, digit);
+		ft_putnbr_fd(-num, 1);
+	}
 }
 
 void pf_print_num(t_flag **flag, va_list *ap)
 {
 	int num;
-	int counter;
 	int digit;
 
 	num = va_arg(*ap, int);
@@ -210,50 +251,9 @@ void pf_print_num(t_flag **flag, va_list *ap)
 	if ((*flag)->minField > digit)
 	{
 		if (num >= 0)
-		{
-			if ((*flag)->negative)
-			{
-				pf_print_zero(flag, digit);
-				ft_putnbr_fd(num, 1);
-				pf_print_space(flag);
-			}
-			else if ((*flag)->zero)
-			{
-				pf_print_space(flag);
-				pf_print_zero(flag, digit);
-				ft_putnbr_fd(num, 1);
-			}
-			else
-			{
-				pf_print_space(flag);
-				ft_putnbr_fd(num, 1);
-			}
-		}
+			pf_print_num_pos(flag, digit, num);
 		else
-		{
-			((*flag)->minField)--;
-			if ((*flag)->negative)
-			{
-				write(1, "-", 1);
-				pf_print_zero(flag, digit);
-				ft_putnbr_fd(-num, 1);
-				pf_print_space(flag);
-			}
-			else if ((*flag)->zero)
-			{
-				pf_print_space(flag);
-				write(1, "-", 1);
-				pf_print_zero(flag, digit);
-				ft_putnbr_fd(-num, 1);
-			}
-			else
-			{
-				pf_print_space(flag);
-				write(1, "-", 1);
-				pf_print_zero(flag, digit);
-				ft_putnbr_fd(-num, 1);
-			}
-		}
+			pf_print_num_neg(flag, digit, num);
 	}
 	else
 	{
