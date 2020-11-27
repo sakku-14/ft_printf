@@ -2,6 +2,7 @@
 
 void pf_initflag(t_flag **flag)
 {
+	(*flag)->ret = 0;
 	(*flag)->negative = false;
 	(*flag)->zero = false;
 	(*flag)->minField = -1;
@@ -505,28 +506,32 @@ int pf_switch(const char **fmt, va_list *ap)
 int ft_printf(const char *fmt, ...)
 {
 	va_list		ap;
+	int ret;
 
+	ret = 0;
 	va_start(ap, fmt);
 	while (*fmt)
 	{
 		if (*fmt != '%')
-			write(1, fmt++, 1);
+			ret += write(1, fmt++, 1);
 		else if (!(pf_switch(&fmt, &ap)))
 				return (-1);
 	}
 	va_end(ap);
-	return (1);
+	return (ret);
 }
 
 int main()
 {
-	int count = 0;
+	int count1 = 0, count2 = 0;
 	unsigned int X = 123;
 //	int num = 123;
 //	char c = 'x';
 //	char *str = "aa";
-	count = ft_printf("ft_printf->[%5.4X]\n", X);
-	count = printf("printf---->[%5.4X]\n", X);
+	count1 = ft_printf("1234\n");
+	count2 = printf("1234\n");
+//	count = ft_printf("ft_printf->[%5.4X]\n", X);
+//	count = printf("printf---->[%5.4X]\n", X);
 //	count = ft_printf("ft_printf->[%20.0p]\n", str);
 //	count = printf("printf---->[%20.0p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
@@ -537,5 +542,5 @@ int main()
 //	count = ft_printf("%-5.t3.5s\n", "aaaaa");
 //	count = ft_printf("%%", 5);
 //	count = ft_printf("----ft_printf----\ntext:hello\nu:%u\nc:%c\ns:%s\nd:%d\ni:%i\nx:%x\nX:%X\np:%p\n", 4294967295, '3', "aaa", 100, 999, 555, 555, str);
-	printf("\n%d\n", count);
+	printf("\nft_printf:%d\nprintf:%d\n", count1, count2);
 }
