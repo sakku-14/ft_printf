@@ -177,7 +177,7 @@ void pf_print_zero(t_flag **flag, int digit)
 	int counter;
 
 	counter = 0;
-	while (++counter < (*flag)->vaDigit - digit)
+	while (counter++ < (*flag)->vaDigit - digit)//<-++counter->counter++に変えた
 		write(1, "0", 1);
 }
 
@@ -489,12 +489,12 @@ int ft_printf(const char *fmt, ...)
 int main()
 {
 	int count = 0;
-	unsigned int x = 123;
+	unsigned int X = 123;
 //	int num = 123;
 //	char c = 'x';
 //	char *str = "aa";
-	count = ft_printf("ft_printf->[%10.5x]\n", x);
-	count = printf("printf---->[%10.5x]\n", x);
+	count = ft_printf("ft_printf->[%3.10X]\n", X);
+	count = printf("printf---->[%3.10X]\n", X);
 //	count = ft_printf("ft_printf->[%20.0p]\n", str);
 //	count = printf("printf---->[%20.0p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
