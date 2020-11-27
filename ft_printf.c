@@ -367,12 +367,44 @@ void pf_print_xnum(t_flag **flag, va_list *ap)
 		ft_putxnbr_fd(num, 1);
 }
 
+void pf_print_lxnum_sub(t_flag **flag, int digit, unsigned int num)
+{
+	if ((*flag)->negative)
+	{
+		pf_print_zero(flag, digit);
+		ft_putlxnbr_fd(num, 1);
+		pf_print_space(flag);
+	}
+	else if ((*flag)->zero)
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putlxnbr_fd(num, 1);
+	}
+	else
+	{
+		pf_print_space(flag);
+		pf_print_zero(flag, digit);
+		ft_putlxnbr_fd(num, 1);
+	}
+}
+
 void pf_print_lxnum(t_flag **flag, va_list *ap)
 {
 	unsigned int num;
+	int digit;
 
 	num = va_arg(*ap, unsigned int);
-	ft_putlxnbr_fd(num, 1);
+	digit = pf_check_xdigit(num);
+
+	if ((*flag)->minField < (*flag)->vaDigit)
+		(*flag)->minField = (*flag)->vaDigit;
+	if ((*flag)->vaDigit < digit)
+		(*flag)->vaDigit = digit;
+	if ((*flag)->minField > digit)
+		pf_print_lxnum_sub(flag, digit, num);
+	else
+		ft_putlxnbr_fd(num, 1);
 }
 
 int pf_check_adddigit(uintptr_t address)
@@ -493,8 +525,8 @@ int main()
 //	int num = 123;
 //	char c = 'x';
 //	char *str = "aa";
-	count = ft_printf("ft_printf->[%3.10X]\n", X);
-	count = printf("printf---->[%3.10X]\n", X);
+	count = ft_printf("ft_printf->[%5.4X]\n", X);
+	count = printf("printf---->[%5.4X]\n", X);
 //	count = ft_printf("ft_printf->[%20.0p]\n", str);
 //	count = printf("printf---->[%20.0p]\n", str);
 //	count = ft_printf("ft_printf->[%-7.5d]\n", num);
