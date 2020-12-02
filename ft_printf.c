@@ -733,4 +733,5 @@ int main()
 	printf("-->%d\n", count);
 	count = printf("[%20.3%]");
 	printf("-->%d\n", count);
+
 }
