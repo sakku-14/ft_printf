@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:49:10 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 17:12:26 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/03 06:43:12 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void pf_print_str(t_flag **flag)
 	char *str;
 
 	str = va_arg((*flag)->ap, char *);
-	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > ft_strlen(str))
-		(*flag)->vaDigit = ft_strlen(str);
+	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > (int)ft_strlen(str))
+		(*flag)->vaDigit = (int)ft_strlen(str);
+//	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > ft_strlen(str))
+//		(*flag)->vaDigit = ft_strlen(str);
 	pf_print_str_sub(flag, str);
 }

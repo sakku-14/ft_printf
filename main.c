@@ -6,11 +6,11 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:45:35 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:45:44 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/03 06:46:09 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 int main()
 {
