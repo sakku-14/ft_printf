@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putxnbr_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 22:11:16 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/11/24 20:14:24 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putxnbr_fd(unsigned int nbr, int fd)
+void	ft_putnbr(int n, t_flag **flag)
 {
-	if (nbr >= 16)
+	unsigned int nbr;
+
+	if (n < 0)
 	{
-		ft_putxnbr_fd(nbr / 16, fd);
-		ft_putxnbr_fd(nbr % 16, fd);
+		nbr = (unsigned int)(-1 * n);
+		ft_putchar('-', flag);
 	}
 	else
-		ft_putchar_fd("0123456789abcdef"[nbr], fd);
+		nbr = (unsigned int)n;
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10, flag);
+		ft_putnbr(nbr % 10, flag);
+	}
+	else
+		ft_putchar(nbr + '0', flag);
 }

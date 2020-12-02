@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putusnbr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 20:14:24 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/11/24 22:05:29 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putusnbr(unsigned int nbr, t_flag **flag)
 {
-	unsigned int nbr;
-
-	if (n < 0)
-	{
-		nbr = (unsigned int)(-1 * n);
-		ft_putchar_fd('-', fd);
-	}
-	else
-		nbr = (unsigned int)n;
 	if (nbr >= 10)
 	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putnbr_fd(nbr % 10, fd);
+		ft_putusnbr(nbr / 10, flag);
+		ft_putusnbr(nbr % 10, flag);
 	}
 	else
-		ft_putchar_fd(nbr + '0', fd);
+		ft_putchar(nbr + '0', flag);
 }

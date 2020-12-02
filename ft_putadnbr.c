@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-void	ft_putadnbr_fd(uintptr_t nbr, int fd)
+void	ft_putadnbr(uintptr_t nbr, t_flag **flag)
 {
 	if (nbr >= 16)
 	{
-		ft_putadnbr_fd(nbr / 16, fd);
-		ft_putadnbr_fd(nbr % 16, fd);
+		ft_putadnbr(nbr / 16, flag);
+		ft_putadnbr(nbr % 16, flag);
 	}
 	else
-		ft_putchar_fd("0123456789abcdef"[nbr], fd);
+		ft_putchar("0123456789abcdef"[nbr], flag);
 }

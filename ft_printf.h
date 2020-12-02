@@ -11,7 +11,7 @@
 
 typedef struct	s_flag
 {
-	char	*fmt;
+	const char	*fmt;
 	va_list	ap;
 	int		ret;
 	bool	negative;
@@ -22,16 +22,16 @@ typedef struct	s_flag
 }				t_flag;
 
 void	ft_bzero(void *s, size_t n);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putusnbr_fd(unsigned int nbr, int fd);
-void	ft_putxnbr_fd(unsigned int nbr, int fd);
-void	ft_putlxnbr_fd(unsigned int nbr, int fd);
-void	ft_putadnbr_fd(uintptr_t nbr, int fd);
+void	ft_putchar(char c, t_flag **flag);
+void	ft_putnbr(int n, t_flag **flag);
+void	ft_putusnbr(unsigned int nbr, t_flag **flag);
+void	ft_putxnbr(unsigned int nbr, t_flag **flag);
+void	ft_putlxnbr(unsigned int nbr, t_flag **flag);
+void	ft_putadnbr(uintptr_t nbr, t_flag **flag);
 size_t	ft_strlen(const char *s);
 void pf_initflag(t_flag **flag);
-void pf_pack_flag(t_flag **flag, const char **fmt, va_list *ap);
-int pf_switch(const char **fmt, va_list *ap);
+void pf_pack_flag(t_flag **flag);
+int pf_switch(t_flag **flag);
 int ft_printf(const char *fmt, ...);
 
 #endif
