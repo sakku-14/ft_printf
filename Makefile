@@ -1,4 +1,4 @@
-NAME	=	ft_printf.a
+NAME	=	libftprintf.a
 
 CC	= gcc
 
@@ -23,6 +23,7 @@ SRCNAME	=	check_digit.c \
 			ft_putxnbr.c \
 			ft_strdup.c \
 			ft_strlen.c \
+			ft_putnbr.c \
 			init_flag.c \
 			pack_flag.c \
 			pack_option.c \

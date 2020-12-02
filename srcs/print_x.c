@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void pf_print_xnum_sub(t_flag **flag, int digit, unsigned int num)
 {
