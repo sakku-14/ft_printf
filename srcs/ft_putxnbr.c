@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putxnbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 22:53:41 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/10/21 22:31:53 by ysakuma          ###   ########.fr       */
+/*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
+/*   Updated: 2020/11/24 22:11:16 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_putxnbr(unsigned int nbr, t_flag **flag)
 {
-	char *ret_str;
-	char *tmp;
-
-	if (!(ret_str = malloc(sizeof(char) * (ft_strlen(s1) + 1))))
-		return (NULL);
-	tmp = ret_str;
-	while (*s1)
-		*ret_str++ = *s1++;
-	*ret_str = '\0';
-	ret_str = tmp;
-	return (ret_str);
+	if (nbr >= 16)
+	{
+		ft_putxnbr(nbr / 16, flag);
+		ft_putxnbr(nbr % 16, flag);
+	}
+	else
+		ft_putchar("0123456789abcdef"[nbr], flag);
 }

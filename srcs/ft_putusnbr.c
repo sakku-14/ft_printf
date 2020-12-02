@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlxnbr.c                                   :+:      :+:    :+:   */
+/*   ft_putusnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 22:18:31 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/11/24 22:05:29 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putlxnbr(unsigned int nbr, t_flag **flag)
+void	ft_putusnbr(unsigned int nbr, t_flag **flag)
 {
-	if (nbr >= 16)
+	if (nbr >= 10)
 	{
-		ft_putlxnbr(nbr / 16, flag);
-		ft_putlxnbr(nbr % 16, flag);
+		ft_putusnbr(nbr / 10, flag);
+		ft_putusnbr(nbr % 10, flag);
 	}
 	else
-		ft_putchar("0123456789ABCDEF"[nbr], flag);
+		ft_putchar(nbr + '0', flag);
 }
