@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:45:35 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/03 13:09:44 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/03 13:18:24 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ int main()
 	printf("-->%d\n", count);
 	count = printf("[%7d]", -14);
 	printf("-->%d\n", count);
+	count = ft_printf("[%07d]", d);
+	printf("-->%d\n", count);
+	count = printf("[%07d]", d);
+	printf("-->%d\n", count);
 //-----------%p-------------
 	printf("\n-------------p-------------\n");
 	count = ft_printf("[%20.15p]", str);
@@ -116,6 +120,10 @@ int main()
 	count = ft_printf("[%10.1d]", u);
 	printf("-->%u\n", count);
 	count = printf("[%10.1d]", u);
+	printf("-->%u\n", count);
+	count = ft_printf("[%010d]", u);
+	printf("-->%u\n", count);
+	count = printf("[%010d]", u);
 	printf("-->%u\n", count);
 //-----------%x-------------
 	printf("\n-------------x-------------\n");
