@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:49:10 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/03 06:43:12 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/03 12:39:24 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,18 @@ void pf_print_str_sub(t_flag **flag, char *str)
 		(*flag)->ret += write(1, str, (*flag)->vaDigit);
 }
 
+void pf_pack_null(char **str)
+{
+	*str = "(null)";
+}
+
 void pf_print_str(t_flag **flag)
 {
 	char *str;
 
 	str = va_arg((*flag)->ap, char *);
+	if (!str)
+		pf_pack_null(&str);
 	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > (int)ft_strlen(str))
 		(*flag)->vaDigit = (int)ft_strlen(str);
 //	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > ft_strlen(str))
