@@ -54,6 +54,7 @@ void pf_print_address(t_flag **flag)
 	else
 	{
 		(*flag)->ret += write(1, "0x", 2);
-		ft_putadnbr(address, flag);
+		if (address != 0)
+			ft_putadnbr(address, flag);
 	}
 }

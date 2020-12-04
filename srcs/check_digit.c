@@ -74,7 +74,7 @@ int pf_check_adddigit(uintptr_t address)
 
 	count = 0;
 	if (address == 0)
-		return (1);
+		return (0);
 	while (address >= 1)
 	{
 		address /= 16;

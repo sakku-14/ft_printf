@@ -3,7 +3,7 @@
 
 int main()
 {
-	ft_printf("%3X", 0);
+	ft_printf("%.p", NULL);
 	printf("\n");
-	printf("%3X", 0);
+	ft_printf("%p", NULL);
 }
