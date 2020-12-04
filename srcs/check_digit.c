@@ -58,8 +58,8 @@ int pf_check_xdigit(unsigned int num)
 	int count;
 
 	count = 0;
-	if (num == 1)
-		return (0);
+	if (num == 0)
+		return (1);
 	while (num >= 1)
 	{
 		num /= 16;
