@@ -44,7 +44,7 @@ int pf_check_usdigit(unsigned int num)
 
 	dret = 0;
 	if (num == 0)
-		return (0);
+		return (1);
 	while (num >= 1)
 	{
 		num /= 10;
@@ -58,7 +58,7 @@ int pf_check_xdigit(unsigned int num)
 	int count;
 
 	count = 0;
-	if (num == 0)
+	if (num == 1)
 		return (0);
 	while (num >= 1)
 	{
@@ -73,6 +73,8 @@ int pf_check_adddigit(uintptr_t address)
 	int count;
 
 	count = 0;
+	if (address == 0)
+		return (1);
 	while (address >= 1)
 	{
 		address /= 16;

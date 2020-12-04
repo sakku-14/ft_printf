@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:49:16 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:49:19 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/03 15:57:24 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void pf_print_usnum_pos(t_flag **flag, int digit, unsigned int num)
 	}
 	else if ((*flag)->zero)
 	{
-		pf_print_space(flag);
+		if ((*flag)->zero_signal == true)
+			(*flag)->vaDigit = (*flag)->minField;
+		else
+			pf_print_space(flag);
 		pf_print_zero(flag, digit);
 		ft_putusnbr(num, flag);
 	}
@@ -41,6 +44,8 @@ void pf_print_usnum(t_flag **flag)
 
 	num = va_arg((*flag)->ap, unsigned int);
 	digit = pf_check_usdigit(num);
+	if ((*flag)->zero == true && (*flag)->vaDigit == -1)
+		(*flag)->zero_signal = true;
 	if ((*flag)->minField < (*flag)->vaDigit)
 		(*flag)->minField = (*flag)->vaDigit;
 	if ((*flag)->vaDigit < digit)

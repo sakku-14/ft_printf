@@ -19,4 +19,5 @@ void pf_initflag(t_flag **flag)
 	(*flag)->minField = -1;
 	(*flag)->vaDigit = -1;
 	ft_bzero(&(*flag)->conversion, sizeof(char));
+	(*flag)->zero_signal = false;
 }

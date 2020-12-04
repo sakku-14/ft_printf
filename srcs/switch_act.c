@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:49:30 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:49:34 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/04 09:21:41 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int pf_switch(t_flag **flag)
 {
 	pf_initflag(flag);
 	pf_pack_flag(flag);
-//	printf("\nneg:%d\nzero:%d\nminField:%d\nvaDigit:%d\nconversion:%c\n", (*flag).negative, (*flag).zero, (*flag).minField, (*flag).vaDigit, (*flag).conversion);
+//	printf("\nneg:%d\nzero:%d\nminField:%d\nvaDigit:%d\nconversion:%c\n", (*flag)->negative, (*flag)->zero, (*flag)->minField, (*flag)->vaDigit, (*flag)->conversion);
 	if ((*flag)->conversion == 'c')
 		pf_print_char(flag);
 	else if((*flag)->conversion == 's')

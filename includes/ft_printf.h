@@ -19,6 +19,7 @@ typedef struct	s_flag
 	int		minField;
 	int		vaDigit;
 	char	conversion;
+	bool	zero_signal;
 }				t_flag;
 
 int pf_check_digit(int num);
