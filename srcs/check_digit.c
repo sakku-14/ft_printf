@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:42:27 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/03 13:14:38 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/05 12:08:27 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int pf_check_adddigit(uintptr_t address)
 
 	count = 0;
 	if (address == 0)
-		return (0);
+		return (1);
 	while (address >= 1)
 	{
 		address /= 16;
