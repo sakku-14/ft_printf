@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:47:05 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/06 09:11:50 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/06 09:40:21 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void pf_print_add(t_flag **flag, int digit, uintptr_t address)
 		pf_print_space(flag);
 		(*flag)->ret += write(1, "0x", 2);
 		pf_print_zero(flag, digit);
-		ft_putadnbr(address, flag);
+		if (!(address == 0 && (*flag)->vaDigit == 0))
+			ft_putadnbr(address, flag);
 	}
 }
 
@@ -50,10 +51,13 @@ void pf_print_address(t_flag **flag)
 	if ((*flag)->vaDigit < digit)
 		(*flag)->vaDigit = digit;// + 1;
 	if ((*flag)->minField > digit)
+	{
+		if ((*flag)->vaDigit == 1 && address == 0)
+			(*flag)->vaDigit = 0;
 		pf_print_add(flag, digit, address);
+	}
 	else
 	{
-//		printf("\nneg:%d\nzero:%d\nminField:%d\nvaDigit:%d\nconversion:%c\n", (*flag)->negative, (*flag)->zero, (*flag)->minField, (*flag)->vaDigit, (*flag)->conversion);
 		(*flag)->ret += write(1, "0x", 2);
 		if (address != 0)
 			ft_putadnbr(address, flag);
