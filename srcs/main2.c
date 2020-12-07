@@ -2,8 +2,6 @@
 
 int main()
 {
-	ft_printf("%5p", NULL);
-	printf("\n");
-	printf("%5p", NULL);
-	printf("\n");
+	ft_printf("% d<-\n", 100);
+	printf("% d<-\n", 100);
 }

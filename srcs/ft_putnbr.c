@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 20:14:24 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/07 14:14:44 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ft_putnbr(int n, t_flag **flag)
 		ft_putnbr(nbr / 10, flag);
 		ft_putnbr(nbr % 10, flag);
 	}
-	else
+	else if (!((*flag)->vaDigit == 0))
 		ft_putchar(nbr + '0', flag);
 }

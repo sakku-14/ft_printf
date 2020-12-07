@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 22:52:46 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/11/24 22:18:31 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/07 14:11:47 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	ft_putlxnbr(unsigned int nbr, t_flag **flag)
 		ft_putlxnbr(nbr / 16, flag);
 		ft_putlxnbr(nbr % 16, flag);
 	}
-	else
+	else if (!((*flag)->vaDigit == 0))
 		ft_putchar("0123456789ABCDEF"[nbr], flag);
 }

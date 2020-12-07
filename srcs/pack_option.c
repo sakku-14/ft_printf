@@ -62,7 +62,11 @@ void pf_pack_asta(t_flag **flag)
 	{
 		((*flag)->fmt)++;
 		if (*(*flag)->fmt && *(*flag)->fmt == '*')
+		{
 			(*flag)->vaDigit = va_arg((*flag)->ap, int);
+			if ((*flag)->vaDigit < 0)
+				(*flag)->vaDigit = -1;
+		}
 		else
 			((*flag)->fmt)--;
 	}

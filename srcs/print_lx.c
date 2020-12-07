@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:47:57 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:48:01 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/07 14:11:15 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void pf_print_lxnum(t_flag **flag)
 	if ((*flag)->minField < (*flag)->vaDigit)
 		(*flag)->minField = (*flag)->vaDigit;
 	if ((*flag)->vaDigit < digit)
-		(*flag)->vaDigit = digit;
+		if (!((*flag)->vaDigit == 0))
+			(*flag)->vaDigit = digit;
 	if ((*flag)->minField > digit)
 		pf_print_lxnum_sub(flag, digit, num);
 	else
