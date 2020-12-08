@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:45:54 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:46:06 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/08 12:13:04 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void pf_pack_flag(t_flag **flag)
 	(*flag)->fmt++;
 	while (*(*flag)->fmt)
 	{
+		if (*(*flag)->fmt == ' ')
+			(*flag)->ret += write(1, " ", 1);
 		if (*(*flag)->fmt == '-')
 			(*flag)->negative = true;
 		else if (*(*flag)->fmt == '0')
