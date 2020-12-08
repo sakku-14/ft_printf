@@ -78,7 +78,7 @@ void pf_print_num(t_flag **flag)
 	if ((*flag)->minField < (*flag)->vaDigit)
 		(*flag)->minField = (*flag)->vaDigit;
 	if ((*flag)->vaDigit < digit)
-		if (!((*flag)->vaDigit == 0))
+		if (!((*flag)->vaDigit == 0) || num != 0)
 			(*flag)->vaDigit = digit;
 	if ((*flag)->minField > digit)
 	{
