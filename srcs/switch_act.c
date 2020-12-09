@@ -15,7 +15,10 @@
 int pf_switch(t_flag **flag)
 {
 	pf_initflag(flag);
-	pf_pack_flag(flag);
+	if (!(pf_pack_flag(flag)))
+		return (0);
+	if ((*flag)->minField >= 2147483647 || (*flag)->vaDigit >= 2147483647)
+		return (0);
 //	printf("\nneg:%d\nzero:%d\nminField:%d\nvaDigit:%d\nconversion:%c\n", (*flag)->negative, (*flag)->zero, (*flag)->minField, (*flag)->vaDigit, (*flag)->conversion);
 	if ((*flag)->conversion == 'c')
 		pf_print_char(flag);

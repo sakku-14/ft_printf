@@ -14,15 +14,22 @@
 
 int pf_pack_minf(t_flag **flag)
 {
-	int *tmp;
+	ssize_t *tmp;
+	int counter;
 
 	tmp = &(*flag)->minField;
 	*tmp = 0;
+	counter = 0;
 	while (*(*flag)->fmt && *(*flag)->fmt >= '0' && *(*flag)->fmt <= '9')
 	{
 		*tmp *= 10;
 		*tmp += *(*flag)->fmt - '0';
 		((*flag)->fmt)++;
+		if (++counter >= 10 && *tmp > 2147483647)
+		{
+			(*flag)->ret = -1;
+			return (0);
+		}
 	}
 	if (!*(*flag)->fmt)
 		return (0);
@@ -31,7 +38,8 @@ int pf_pack_minf(t_flag **flag)
 
 int pf_pack_vad(t_flag **flag)
 {
-	int *tmp;
+	ssize_t *tmp;
+	int counter;
 
 	if (*(*flag)->fmt == '*')
 		return (1);
@@ -45,38 +53,55 @@ int pf_pack_vad(t_flag **flag)
 		((*flag)->fmt)--;
 		return (1);
 	}
+	counter = 0;
 	while (*(*flag)->fmt >= '0' && *(*flag)->fmt <= '9')
 	{
 		*tmp *= 10;
 		*tmp += *(*flag)->fmt - '0';
 		((*flag)->fmt)++;
+		if (++counter >= 10 && *tmp > 2147483647)
+		{
+			(*flag)->ret = -1;
+			return (0);
+		}
 	}
 	if (!*(*flag)->fmt)
 		return (0);
 	return (1);
 }
 
-void pf_pack_asta(t_flag **flag)
+int pf_pack_asta(t_flag **flag)
 {
+	int tmp;
+
 	if (*(*flag)->fmt == '.')
 	{
 		((*flag)->fmt)++;
 		if (*(*flag)->fmt && *(*flag)->fmt == '*')
 		{
-			(*flag)->vaDigit = va_arg((*flag)->ap, int);
-			if ((*flag)->vaDigit < 0)
+			tmp = va_arg((*flag)->ap, int);
+			if (tmp < 0)
 				(*flag)->vaDigit = -1;
+			else
+				(*flag)->vaDigit = tmp;
+			
 		}
 		else
 			((*flag)->fmt)--;
 	}
 	else
 	{
-		(*flag)->minField = va_arg((*flag)->ap, int);
-		if ((*flag)->minField < 0)
+		tmp = va_arg((*flag)->ap, int);
+		if (tmp == 2147483647 || tmp == -2147483648)
+			return (0);
+		if (tmp < 0)
 		{
 			(*flag)->negative = true;
-			(*flag)->minField *= -1;
+			(*flag)->minField = -1 * tmp;
 		}
+		else
+			(*flag)->minField = tmp;
+		
 	}
+	return (1);
 }

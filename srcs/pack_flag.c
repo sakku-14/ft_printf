@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void pf_pack_flag(t_flag **flag)
+int pf_pack_flag(t_flag **flag)
 {
 	(*flag)->fmt++;
 	while (*(*flag)->fmt)
@@ -24,23 +24,29 @@ void pf_pack_flag(t_flag **flag)
 		else if (*(*flag)->fmt == '0')
 			(*flag)->zero = true;
 		else if (*(*flag)->fmt == '*')
-			pf_pack_asta(flag);
+		{
+			if (!(pf_pack_asta(flag)))
+				return (0);
+		}
 		else if (*(*flag)->fmt >= '1' && *(*flag)->fmt <= '9')
 			if (!(pf_pack_minf(flag)))
-				break ;
+				return (0) ;
 		if (*(*flag)->fmt == '.')
 		{
-			pf_pack_asta(flag);
+			if (!(pf_pack_asta(flag)))
+				return (0);
 			if (!(pf_pack_vad(flag)))
-				break ;
+				return (0) ;
 		}
 		if (*(*flag)->fmt == 'c' || *(*flag)->fmt == 's' || *(*flag)->fmt == 'p' || *(*flag)->fmt == 'd' ||
 			*(*flag)->fmt == 'i' || *(*flag)->fmt == 'u' || *(*flag)->fmt == 'x' || *(*flag)->fmt == 'X' || *(*flag)->fmt == '%')
 		{
+			
 			(*flag)->conversion = *(*flag)->fmt;
 			((*flag)->fmt)++;
 			break ;
 		}
 		((*flag)->fmt)++;
 	}
+	return (1);
 }
