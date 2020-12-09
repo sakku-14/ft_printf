@@ -19,6 +19,6 @@ void	ft_putxnbr(unsigned int nbr, t_flag **flag)
 		ft_putxnbr(nbr / 16, flag);
 		ft_putxnbr(nbr % 16, flag);
 	}
-	else if (!((*flag)->vaDigit == 0))
+	else if ((*flag)->vaDigit != 0)
 		ft_putchar("0123456789abcdef"[nbr], flag);
 }

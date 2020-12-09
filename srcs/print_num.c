@@ -80,7 +80,7 @@ void pf_print_num(t_flag **flag)
 	if ((*flag)->vaDigit < digit)
 		if (!((*flag)->vaDigit == 0) || num != 0)
 			(*flag)->vaDigit = digit;
-	if ((*flag)->minField > digit)
+	if ((*flag)->minField >= digit)
 	{
 		if (num >= 0)
 			pf_print_num_pos(flag, digit, num);

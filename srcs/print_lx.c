@@ -52,7 +52,7 @@ void pf_print_lxnum(t_flag **flag)
 	if ((*flag)->vaDigit < digit)
 		if (!((*flag)->vaDigit == 0) || num != 0)
 			(*flag)->vaDigit = digit;
-	if ((*flag)->minField > digit)
+	if ((*flag)->minField >= digit)
 		pf_print_lxnum_sub(flag, digit, num);
 	else
 		ft_putlxnbr(num, flag);

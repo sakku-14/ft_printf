@@ -51,7 +51,7 @@ void pf_print_usnum(t_flag **flag)
 	if ((*flag)->vaDigit < digit)
 		if (!((*flag)->vaDigit == 0) || num != 0)
 			(*flag)->vaDigit = digit;
-	if ((*flag)->minField > digit)
+	if ((*flag)->minField >= digit)
 		pf_print_usnum_pos(flag, digit, num);
 	else
 		ft_putusnbr(num, flag);
