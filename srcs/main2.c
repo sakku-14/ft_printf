@@ -2,10 +2,8 @@
 
 int main()
 {
-	ft_printf("%.0d\n", 0);
-	printf("%.0d\n", 0);
-	ft_printf("%.0d\n", 100);
-	printf("%.0d\n", 100);
-	ft_printf("%5.0d\n", 100);
-	printf("%5.0d\n", 100);
+	int d = 777;
+	char *str = "hello";
+	unsigned int u = 555;
+	ft_printf("%d\n%s\n%u\n", d, str, u);
 }
