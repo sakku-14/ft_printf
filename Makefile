@@ -21,7 +21,6 @@ SRCNAME	=	check_digit.c \
 			ft_putlxnbr.c \
 			ft_putusnbr.c \
 			ft_putxnbr.c \
-			ft_strdup.c \
 			ft_strlen.c \
 			ft_putnbr.c \
 			init_flag.c \
