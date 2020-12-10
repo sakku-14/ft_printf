@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:43:03 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:43:15 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:55:37 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_error_free_flag(t_flag **flag)
+int		ft_error_free_flag(t_flag **flag)
 {
 	if (flag)
 	{
@@ -22,7 +22,7 @@ int ft_error_free_flag(t_flag **flag)
 	return (-1);
 }
 
-void ft_last_free_flag(t_flag **flag)
+void	ft_last_free_flag(t_flag **flag)
 {
 	if (flag)
 	{

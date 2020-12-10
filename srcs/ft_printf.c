@@ -6,16 +6,16 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:43:31 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/02 16:43:34 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 10:01:22 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_printf(const char *fmt, ...)
+int	ft_printf(const char *fmt, ...)
 {
-	t_flag *flag;
-	int ret;
+	t_flag	*flag;
+	int		ret;
 
 	if (!(flag = malloc(sizeof(t_flag))))
 		return (-1);
@@ -25,10 +25,12 @@ int ft_printf(const char *fmt, ...)
 	va_start(flag->ap, fmt);
 	flag->fmt = fmt;
 	while (*flag->fmt)
+	{
 		if (*flag->fmt != '%')
 			flag->ret += write(1, flag->fmt++, 1);
 		else if (!(pf_switch(&flag)))
-				return (-1);
+			return (-1);
+	}
 	va_end(flag->ap);
 	ret = flag->ret;
 	ft_last_free_flag(&flag);

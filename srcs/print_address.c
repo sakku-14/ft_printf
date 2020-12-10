@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:47:05 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/07 13:30:51 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:57:33 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void pf_print_add(t_flag **flag, int digit, uintptr_t address)
+void	pf_print_add(t_flag **flag, int digit, uintptr_t address)
 {
 	(*flag)->minField -= 2;
 	if ((*flag)->negative)
@@ -39,10 +39,10 @@ void pf_print_add(t_flag **flag, int digit, uintptr_t address)
 	}
 }
 
-void pf_print_address(t_flag **flag)
+void	pf_print_address(t_flag **flag)
 {
-	uintptr_t address;
-	int digit;
+	uintptr_t	address;
+	int			digit;
 
 	address = (uintptr_t)va_arg((*flag)->ap, void *);
 	digit = pf_check_adddigit(address);
@@ -63,8 +63,6 @@ void pf_print_address(t_flag **flag)
 		if (address != 0)
 			ft_putadnbr(address, flag);
 		else if ((*flag)->vaDigit == 1)
-			{
-				(*flag)->ret += write(1, "0", 1);
-			}
+			(*flag)->ret += write(1, "0", 1);
 	}
 }

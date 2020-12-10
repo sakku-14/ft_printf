@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:48:09 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/07 14:13:05 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:55:02 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void pf_print_num_pos(t_flag **flag, int digit, int num)
+void	pf_print_num_pos(t_flag **flag, int digit, int num)
 {
 	if ((*flag)->negative)
 	{
@@ -37,7 +37,7 @@ void pf_print_num_pos(t_flag **flag, int digit, int num)
 	}
 }
 
-void pf_print_num_neg(t_flag **flag, int digit, int num)
+void	pf_print_num_neg(t_flag **flag, int digit, int num)
 {
 	((*flag)->minField)--;
 	if ((*flag)->negative)
@@ -66,7 +66,7 @@ void pf_print_num_neg(t_flag **flag, int digit, int num)
 	}
 }
 
-void pf_print_num(t_flag **flag)
+void	pf_print_num(t_flag **flag)
 {
 	int num;
 	int digit;

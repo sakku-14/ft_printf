@@ -27,6 +27,7 @@ SRCNAME	=	check_digit.c \
 			init_flag.c \
 			pack_flag.c \
 			pack_option.c \
+			pack_option_asta.c \
 			print_address.c \
 			print_c.c \
 			print_lx.c \

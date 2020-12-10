@@ -3,9 +3,6 @@
 
 int main()
 {
-	ft_printf("[%1.0x]", 0);
-	printf("\n");
-	printf("[%1.0x]", 0);
-	printf("\n");
-
+	int count = ft_printf("%d\n", 010);
+	printf("%d\n", count);
 }

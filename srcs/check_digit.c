@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:42:27 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/05 12:08:27 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:49:13 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int pf_check_digit(int num)
+int	pf_check_digit(int num)
 {
 	int dret;
 
@@ -32,13 +32,13 @@ int pf_check_digit(int num)
 		while (num <= -1)
 		{
 			num /= 10;
-			dret ++;
+			dret++;
 		}
 	}
 	return (dret);
 }
 
-int pf_check_usdigit(unsigned int num)
+int	pf_check_usdigit(unsigned int num)
 {
 	int dret;
 
@@ -53,7 +53,7 @@ int pf_check_usdigit(unsigned int num)
 	return (dret);
 }
 
-int pf_check_xdigit(unsigned int num)
+int	pf_check_xdigit(unsigned int num)
 {
 	int count;
 
@@ -68,7 +68,7 @@ int pf_check_xdigit(unsigned int num)
 	return (count);
 }
 
-int pf_check_adddigit(uintptr_t address)
+int	pf_check_adddigit(uintptr_t address)
 {
 	int count;
 

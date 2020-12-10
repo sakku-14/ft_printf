@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:49:10 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/03 12:39:24 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:59:08 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void pf_print_str_sub(t_flag **flag, char *str)
+void	pf_print_str_sub(t_flag **flag, char *str)
 {
 	if ((*flag)->minField > (*flag)->vaDigit)
 	{
@@ -39,21 +39,19 @@ void pf_print_str_sub(t_flag **flag, char *str)
 		(*flag)->ret += write(1, str, (*flag)->vaDigit);
 }
 
-void pf_pack_null(char **str)
+void	pf_pack_null(char **str)
 {
 	*str = "(null)";
 }
 
-void pf_print_str(t_flag **flag)
+void	pf_print_str(t_flag **flag)
 {
 	char *str;
 
 	str = va_arg((*flag)->ap, char *);
 	if (!str)
 		pf_pack_null(&str);
-	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > (int)ft_strlen(str))
-		(*flag)->vaDigit = (int)ft_strlen(str);
-//	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > ft_strlen(str))
-//		(*flag)->vaDigit = ft_strlen(str);
+	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > (ssize_t)ft_strlen(str))
+		(*flag)->vaDigit = (ssize_t)ft_strlen(str);
 	pf_print_str_sub(flag, str);
 }

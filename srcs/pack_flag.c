@@ -6,13 +6,13 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:45:54 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/08 12:13:04 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 09:58:25 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int pf_pack_flag(t_flag **flag)
+int	pf_pack_flag(t_flag **flag)
 {
 	(*flag)->fmt++;
 	while (*(*flag)->fmt)
@@ -30,18 +30,17 @@ int pf_pack_flag(t_flag **flag)
 		}
 		else if (*(*flag)->fmt >= '1' && *(*flag)->fmt <= '9')
 			if (!(pf_pack_minf(flag)))
-				return (0) ;
+				return (0);
 		if (*(*flag)->fmt == '.')
 		{
 			if (!(pf_pack_asta(flag)))
 				return (0);
 			if (!(pf_pack_vad(flag)))
-				return (0) ;
+				return (0);
 		}
 		if (*(*flag)->fmt == 'c' || *(*flag)->fmt == 's' || *(*flag)->fmt == 'p' || *(*flag)->fmt == 'd' ||
 			*(*flag)->fmt == 'i' || *(*flag)->fmt == 'u' || *(*flag)->fmt == 'x' || *(*flag)->fmt == 'X' || *(*flag)->fmt == '%')
 		{
-			
 			(*flag)->conversion = *(*flag)->fmt;
 			((*flag)->fmt)++;
 			break ;
