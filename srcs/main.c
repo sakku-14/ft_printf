@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:45:35 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/03 13:18:24 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/10 14:30:30 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,5 @@ int main()
 	printf("-->%d\n", count);
 	count = printf("[%20.3%]");
 	printf("-->%d\n", count);
-
+	while (1){}
 }
