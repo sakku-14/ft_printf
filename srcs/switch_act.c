@@ -17,7 +17,7 @@ int	pf_switch(t_flag **flag)
 	pf_initflag(flag);
 	if (!(pf_pack_flag(flag)))
 		return (0);
-	if ((*flag)->minField >= 2147483647 || (*flag)->vaDigit >= 2147483647)
+	if ((*flag)->minfield >= 2147483647 || (*flag)->vadigit >= 2147483647)
 		return (0);
 	if ((*flag)->conversion == 'c')
 		pf_print_char(flag);

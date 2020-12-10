@@ -14,7 +14,7 @@
 
 void	pf_print_add(t_flag **flag, int digit, uintptr_t address)
 {
-	(*flag)->minField -= 2;
+	(*flag)->minfield -= 2;
 	if ((*flag)->negative)
 	{
 		(*flag)->ret += write(1, "0x", 2);
@@ -34,7 +34,7 @@ void	pf_print_add(t_flag **flag, int digit, uintptr_t address)
 		pf_print_space(flag);
 		(*flag)->ret += write(1, "0x", 2);
 		pf_print_zero(flag, digit);
-		if (!(address == 0 && (*flag)->vaDigit == 0))
+		if (!(address == 0 && (*flag)->vadigit == 0))
 			ft_putadnbr(address, flag);
 	}
 }
@@ -46,23 +46,23 @@ void	pf_print_address(t_flag **flag)
 
 	address = (uintptr_t)va_arg((*flag)->ap, void *);
 	digit = pf_check_adddigit(address);
-	if ((*flag)->minField < (*flag)->vaDigit)
-		(*flag)->minField = (*flag)->vaDigit;
-	if ((*flag)->vaDigit < digit)
+	if ((*flag)->minfield < (*flag)->vadigit)
+		(*flag)->minfield = (*flag)->vadigit;
+	if ((*flag)->vadigit < digit)
 	{
-		if ((*flag)->vaDigit == 0)
-			(*flag)->vaDigit = 0;
+		if ((*flag)->vadigit == 0)
+			(*flag)->vadigit = 0;
 		else
-			(*flag)->vaDigit = digit;
+			(*flag)->vadigit = digit;
 	}
-	if ((*flag)->minField > digit)
+	if ((*flag)->minfield > digit)
 		pf_print_add(flag, digit, address);
 	else
 	{
 		(*flag)->ret += write(1, "0x", 2);
 		if (address != 0)
 			ft_putadnbr(address, flag);
-		else if ((*flag)->vaDigit == 1)
+		else if ((*flag)->vadigit == 1)
 			(*flag)->ret += write(1, "0", 1);
 	}
 }

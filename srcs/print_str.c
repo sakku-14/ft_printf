@@ -14,29 +14,29 @@
 
 void	pf_print_str_sub(t_flag **flag, char *str)
 {
-	if ((*flag)->minField > (*flag)->vaDigit)
+	if ((*flag)->minfield > (*flag)->vadigit)
 	{
 		if ((*flag)->negative)
 		{
-			(*flag)->ret += write(1, str, (*flag)->vaDigit);
-			while (((*flag)->minField)-- > (*flag)->vaDigit)
+			(*flag)->ret += write(1, str, (*flag)->vadigit);
+			while (((*flag)->minfield)-- > (*flag)->vadigit)
 				(*flag)->ret += write(1, " ", 1);
 		}
 		else if ((*flag)->zero)
 		{
-			while (((*flag)->minField)-- > (*flag)->vaDigit)
+			while (((*flag)->minfield)-- > (*flag)->vadigit)
 				(*flag)->ret += write(1, "0", 1);
-			(*flag)->ret += write(1, str, (*flag)->vaDigit);
+			(*flag)->ret += write(1, str, (*flag)->vadigit);
 		}
 		else
 		{
-			while (((*flag)->minField)-- > (*flag)->vaDigit)
+			while (((*flag)->minfield)-- > (*flag)->vadigit)
 				(*flag)->ret += write(1, " ", 1);
-			(*flag)->ret += write(1, str, (*flag)->vaDigit);
+			(*flag)->ret += write(1, str, (*flag)->vadigit);
 		}
 	}
 	else
-		(*flag)->ret += write(1, str, (*flag)->vaDigit);
+		(*flag)->ret += write(1, str, (*flag)->vadigit);
 }
 
 void	pf_pack_null(char **str)
@@ -51,7 +51,7 @@ void	pf_print_str(t_flag **flag)
 	str = va_arg((*flag)->ap, char *);
 	if (!str)
 		pf_pack_null(&str);
-	if ((*flag)->vaDigit == -1 || (*flag)->vaDigit > (ssize_t)ft_strlen(str))
-		(*flag)->vaDigit = (ssize_t)ft_strlen(str);
+	if ((*flag)->vadigit == -1 || (*flag)->vadigit > (ssize_t)ft_strlen(str))
+		(*flag)->vadigit = (ssize_t)ft_strlen(str);
 	pf_print_str_sub(flag, str);
 }

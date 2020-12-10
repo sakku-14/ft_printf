@@ -16,8 +16,8 @@ void	pf_initflag(t_flag **flag)
 {
 	(*flag)->negative = false;
 	(*flag)->zero = false;
-	(*flag)->minField = -1;
-	(*flag)->vaDigit = -1;
+	(*flag)->minfield = -1;
+	(*flag)->vadigit = -1;
 	ft_bzero(&(*flag)->conversion, sizeof(char));
 	(*flag)->zero_signal = false;
 }

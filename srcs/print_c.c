@@ -14,23 +14,23 @@
 
 void	pf_print_onechar(t_flag **flag, int c)
 {
-	if ((*flag)->minField > 1)
+	if ((*flag)->minfield > 1)
 	{
 		if ((*flag)->negative)
 		{
 			(*flag)->ret += write(1, &c, 1);
-			while (--((*flag)->minField))
+			while (--((*flag)->minfield))
 				(*flag)->ret += write(1, " ", 1);
 		}
 		else if ((*flag)->zero)
 		{
-			while (--((*flag)->minField))
+			while (--((*flag)->minfield))
 				(*flag)->ret += write(1, "0", 1);
 			(*flag)->ret += write(1, &c, 1);
 		}
 		else
 		{
-			while (--((*flag)->minField))
+			while (--((*flag)->minfield))
 				(*flag)->ret += write(1, " ", 1);
 			(*flag)->ret += write(1, &c, 1);
 		}

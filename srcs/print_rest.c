@@ -17,7 +17,7 @@ void	pf_print_zero(t_flag **flag, int digit)
 	int counter;
 
 	counter = 0;
-	while (counter++ < (*flag)->vaDigit - digit)
+	while (counter++ < (*flag)->vadigit - digit)
 		(*flag)->ret += write(1, "0", 1);
 }
 
@@ -26,6 +26,6 @@ void	pf_print_space(t_flag **flag)
 	int counter;
 
 	counter = 0;
-	while (counter++ < (*flag)->minField - (*flag)->vaDigit)
+	while (counter++ < (*flag)->minfield - (*flag)->vadigit)
 		(*flag)->ret += write(1, " ", 1);
 }

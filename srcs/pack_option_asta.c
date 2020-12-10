@@ -21,9 +21,9 @@ void	pf_pack_asta_va(t_flag **flag)
 	{
 		tmp = va_arg((*flag)->ap, int);
 		if (tmp < 0)
-			(*flag)->vaDigit = -1;
+			(*flag)->vadigit = -1;
 		else
-			(*flag)->vaDigit = tmp;
+			(*flag)->vadigit = tmp;
 	}
 	else
 		((*flag)->fmt)--;
@@ -39,10 +39,10 @@ int		pf_pack_asta_min(t_flag **flag)
 	if (tmp < 0)
 	{
 		(*flag)->negative = true;
-		(*flag)->minField = -1 * tmp;
+		(*flag)->minfield = -1 * tmp;
 	}
 	else
-		(*flag)->minField = tmp;
+		(*flag)->minfield = tmp;
 	return (1);
 }
 

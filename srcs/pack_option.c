@@ -17,7 +17,7 @@ int	pf_pack_minf(t_flag **flag)
 	ssize_t	*tmp;
 	int		counter;
 
-	tmp = &(*flag)->minField;
+	tmp = &(*flag)->minfield;
 	*tmp = 0;
 	counter = 0;
 	while (*(*flag)->fmt && *(*flag)->fmt >= '0' && *(*flag)->fmt <= '9')
@@ -61,7 +61,7 @@ int	pf_pack_vad(t_flag **flag)
 
 	if (*(*flag)->fmt == '*')
 		return (1);
-	tmp = &(*flag)->vaDigit;
+	tmp = &(*flag)->vadigit;
 	*tmp = 0;
 	((*flag)->fmt)++;
 	if (!*(*flag)->fmt)

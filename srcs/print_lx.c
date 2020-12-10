@@ -23,7 +23,7 @@ void	pf_print_lxnum_sub(t_flag **flag, int digit, unsigned int num)
 	else if ((*flag)->zero)
 	{
 		if ((*flag)->zero_signal == true)
-			(*flag)->vaDigit = (*flag)->minField;
+			(*flag)->vadigit = (*flag)->minfield;
 		else
 			pf_print_space(flag);
 		pf_print_zero(flag, digit);
@@ -44,14 +44,14 @@ void	pf_print_lxnum(t_flag **flag)
 
 	num = va_arg((*flag)->ap, unsigned int);
 	digit = pf_check_xdigit(num);
-	if ((*flag)->zero == true && (*flag)->vaDigit == -1)
+	if ((*flag)->zero == true && (*flag)->vadigit == -1)
 		(*flag)->zero_signal = true;
-	if ((*flag)->minField < (*flag)->vaDigit)
-		(*flag)->minField = (*flag)->vaDigit;
-	if ((*flag)->vaDigit < digit)
-		if (!((*flag)->vaDigit == 0) || num != 0)
-			(*flag)->vaDigit = digit;
-	if ((*flag)->minField >= digit)
+	if ((*flag)->minfield < (*flag)->vadigit)
+		(*flag)->minfield = (*flag)->vadigit;
+	if ((*flag)->vadigit < digit)
+		if (!((*flag)->vadigit == 0) || num != 0)
+			(*flag)->vadigit = digit;
+	if ((*flag)->minfield >= digit)
 		pf_print_lxnum_sub(flag, digit, num);
 	else
 		ft_putlxnbr(num, flag);

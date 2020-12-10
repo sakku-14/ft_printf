@@ -19,6 +19,6 @@ void	ft_putusnbr(unsigned int nbr, t_flag **flag)
 		ft_putusnbr(nbr / 10, flag);
 		ft_putusnbr(nbr % 10, flag);
 	}
-	else if (!((*flag)->vaDigit == 0))
+	else if (!((*flag)->vadigit == 0))
 		ft_putchar(nbr + '0', flag);
 }
