@@ -79,6 +79,5 @@ void			ft_putxnbr(unsigned int nbr, t_flag **flag);
 void			ft_putlxnbr(unsigned int nbr, t_flag **flag);
 void			ft_putadnbr(uintptr_t nbr, t_flag **flag);
 size_t			ft_strlen(const char *s);
-char			*ft_strdup(const char *s1);
 
 #endif
