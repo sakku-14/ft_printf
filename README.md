@@ -1,4 +1,4 @@
-# ft_printf
+ft_printf
 参考ページ
 
 1.printf出力書式まとめ
