@@ -6,7 +6,7 @@
 /*   By: ysakuma <ysakuma@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 16:43:31 by ysakuma           #+#    #+#             */
-/*   Updated: 2020/12/10 10:01:22 by ysakuma          ###   ########.fr       */
+/*   Updated: 2020/12/16 10:27:29 by ysakuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_printf(const char *fmt, ...)
 		if (*flag->fmt != '%')
 			flag->ret += write(1, flag->fmt++, 1);
 		else if (!(pf_switch(&flag)))
-			return (-1);
+			return (ft_error_free_flag(&flag));
 	}
 	va_end(flag->ap);
 	ret = flag->ret;
